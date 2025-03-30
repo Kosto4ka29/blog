@@ -9,6 +9,9 @@ const select = {
   containerOf: {
     menu: '#product-list', // kontener dla listy produktów
   },
+  menuProduct: {
+    imageWrapper: '.product_images', // ← to musisz DODAĆ
+  },
 };
 
 
@@ -67,17 +70,17 @@ class Product {
   // Renderowanie produktu w menu
   renderInMenu() {
     const thisProduct = this;
-
-    // Generowanie HTML dla produktu
+  
     const generatedHTML = templates.menuProduct(thisProduct.data);
-
-    // Tworzenie elementu DOM z wygenerowanego HTML
+    console.log('HTML wygenerowany przez Handlebars:', generatedHTML);
+  
     thisProduct.element = utils.createDOMFromHTML(generatedHTML);
-
-    // Dodanie elementu do kontenera menu
+    console.log('Element DOM:', thisProduct.element);
+  
     const menuContainer = document.querySelector(select.containerOf.menu);
     menuContainer.appendChild(thisProduct.element);
   }
+  
 
   // Inicjalizacja opcji dla produktów (checkbox, radio, select)
   initOptions() {
