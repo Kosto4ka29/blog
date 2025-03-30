@@ -9,9 +9,6 @@ const select = {
   containerOf: {
     menu: '#product-list', // kontener dla listy produktów
   },
-  menuProduct: {
-    imageWrapper: '.product_images',
-  },
 };
 
 
