@@ -10,7 +10,7 @@ const select = {
     menu: '#product-list', // kontener dla listy produktów
   },
   menuProduct: {
-    imageWrapper: '.product_images', // ← to musisz DODAĆ
+    imageWrapper: '.product_images',
   },
 };
 
@@ -43,6 +43,7 @@ class Product {
 
   getElements(){
     const thisProduct = this;
+
     thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
   }
 
@@ -97,28 +98,57 @@ class Product {
     }
   }
 
-  // Funkcja do obliczania ceny po uwzględnieniu opcji
   updatePrice() {
     const thisProduct = this;
-
-    // Zresetowanie dodatkowej ceny
+  
     let newPrice = thisProduct.basePrice;
-
-    // Dodanie ceny opcji (checkbox, radio, select)
-    const options = thisProduct.element.querySelectorAll('.product__params input');
-    for (let option of options) {
-      if (option.checked) {
-        const price = parseFloat(option.dataset.price); // Pobranie ceny z atrybutu data-price
-        newPrice += price; // Zwiększenie ceny o wartość opcji
+  
+    const formData = utils.serializeFormToObject(thisProduct.element);
+  
+    for (let paramId in thisProduct.data.params) {
+      const param = thisProduct.data.params[paramId];
+  
+      for (let optionId in param.options) {
+        const option = param.options[optionId];
+  
+        const optionSelected = formData[paramId] && (
+          (Array.isArray(formData[paramId]) && formData[paramId].includes(optionId)) ||
+          formData[paramId] === optionId
+        );
+  
+        // Cena
+        if (optionSelected && !option.default) {
+          newPrice += option.price;
+        } else if (!optionSelected && option.default) {
+          newPrice -= option.price;
+        }
+  
+        // Obrazki
+        if (thisProduct.imageWrapper) {
+          const imageClass = `.${paramId}-${optionId}`;
+          const image = thisProduct.imageWrapper.querySelector(imageClass);
+  
+          if (image) {
+            if (optionSelected) {
+              image.classList.add('active');
+            } else {
+              image.classList.remove('active');
+            }
+          }
+        }
       }
     }
-
+  
+  
+  
     // Aktualizacja ceny na stronie
     const priceElement = thisProduct.element.querySelector('.product__total-price .price');
-    priceElement.textContent = newPrice.toFixed(2); // Ustawienie nowej ceny na stronie
-    thisProduct.optionsPrice = newPrice - thisProduct.basePrice; // Zapamiętanie dodatkowej ceny
+    priceElement.textContent = newPrice.toFixed(2);
+  
+    // Zapamiętujemy dodatkową cenę z opcji
+    thisProduct.optionsPrice = newPrice - thisProduct.basePrice;
   }
-}
+} 
 
 // Klasa dla aplikacji
 const app = {
