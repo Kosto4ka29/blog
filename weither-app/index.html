@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	    <meta charset="UTF-8">
+	    <title>Weather</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    </head>
+    <body onload="startApp();">
+        <h1 class="text-center">Weather</h1>
+        <div class="container-fluid m-4">
+            <table class="table w-50 mx-auto table-responsive table-hover">
+                <tbody>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            <img src="https://via.placeholder.com/150" id="currentWeatherImg" alt="image">
+                        </td>
+                        <td class="align-middle">
+                            <a href="" id="locationLink"><span class="visually-hidden">Mapa</span></a>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            Temperatura:
+                        </td>
+                        <td class="align-middle">
+                            <span id="temp"></span>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            Wilgotnosc:
+                        </td>
+                        <td class="align-middle">
+                            <span id="humidity"></span>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            Cisnienie:
+                        </td>
+                        <td class="align-middle">
+                            <span id="pressure"></span>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            Zachmurzenie:
+                        </td>
+                        <td class="align-middle">
+                            <span id="cloudsPerc"></span>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            Szybkosc wiatru:
+                        </td>
+                        <td class="align-middle">
+                            <span id="windSpeed"></span>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            Wschód słońca:
+                        </td>
+                        <td class="align-middle">
+                            <span id="sunRise"></span>
+                        </td>
+                    </tr>
+                    <tr class="table-info">
+                        <td class="align-middle">
+                            Zachod słońca:
+                        </td>
+                        <td class="align-middle">
+                            <span id="sunSet"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+	    <script src="js/script.js"></script>
+    </body>
+</html>
